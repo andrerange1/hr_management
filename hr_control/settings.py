@@ -33,12 +33,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "app-hr-control.herokuapp.com",
-    "localhost",
+    "localhost:3000",
+    "127.0.0.1"
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "https://hr-control-website.vercel.app",
     "http://localhost:3000"
+ 
 ]
 
 # Application definition
@@ -58,7 +60,12 @@ THIRD_PARTY_APPS = ["rest_framework", "rest_framework.authtoken"]
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.TokenAuthentication",
-    )
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+    'rest_framework.permissions.IsAuthenticated',
+],
 }
 
 # Apps instalados
@@ -112,24 +119,24 @@ WSGI_APPLICATION = "hr_control.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 # POSTGRESQL DB
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": getenv("DB_NAME"),
-        "USER": getenv("DB_USER"),
-        "PASSWORD": getenv("DB_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
-
-# SQLITE DB
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": getenv("DB_NAME"),
+#         "USER": getenv("DB_USER"),
+#         "PASSWORD": getenv("DB_PASSWORD"),
+#         "HOST": "localhost",
+#         "PORT": "5432",
 #     }
 # }
+
+# SQLITE DB
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 DATABASE_URL = getenv("DATABASE_URL")
 

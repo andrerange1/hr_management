@@ -15,3 +15,9 @@
 <li>
 A api possui proteção na maioria de seus endpoints então temos um administrador pré-cadastrado no banco para que possam ser criados outros adminstradores
 </li>
+
+<strong>Para rodar a API LOCALMENTE</strong>
+
+<p>Instale o Virtualenv</p>
+
+<li>pip install virtualenv</li>
